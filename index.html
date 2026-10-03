@@ -1,363 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Oodel — Cake order tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oodel — Customer Portal Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --pistachio:#E8F0E8;
-  --cream:#FFFDF8;
-  --ink:#2B1B27;
-  --forest:#2F4A3B;
-  --raspberry:#C0335E;
-  --butter:#F3CC63;
-  --line:rgba(43,27,39,.14);
-  --soft:rgba(43,27,39,.55);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Karla',system-ui,sans-serif;
-  background:var(--pistachio);
-  color:var(--ink);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:520px;margin:0 auto;padding:20px 18px 56px}
-
-header{display:flex;align-items:flex-start;justify-content:space-between;padding:6px 2px 6px;gap:12px}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{flex:0 0 auto;display:block}
-.mark{font-family:'Fraunces',Georgia,serif;font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--forest)}
-.mark span{color:var(--raspberry)}
-.tagline{font-size:12px;color:var(--soft);margin-top:1px}
-.ordno{font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums;padding-top:2px}
-
-.card{
-  background:var(--cream);
-  border-radius:26px;
-  padding:26px 22px 24px;
-  border:1px solid var(--line);
-  opacity:0;transform:translateY(14px);
-  animation:rise .7s cubic-bezier(.22,1,.36,1) .1s forwards;
-}
-@keyframes rise{to{opacity:1;transform:none}}
-
-.eta-num{
-  font-family:'Fraunces',Georgia,serif;
-  font-size:60px;line-height:1;font-weight:600;
-  letter-spacing:-.03em;font-variant-numeric:tabular-nums;
-}
-.eta-unit{font-family:'Karla',sans-serif;font-size:17px;color:var(--soft);margin-left:6px}
-.eta-unit.big{font-family:'Fraunces',Georgia,serif;font-size:46px;font-weight:600;letter-spacing:-.03em;color:var(--raspberry);margin-left:0;line-height:1}
-.eta-num.hide{display:none}
-.eta-line{font-size:15px;color:var(--soft);margin-top:8px}
-.eta-line b{color:var(--ink);font-weight:600}
-
-.cta{
-  display:block;width:100%;margin:22px 0 26px;
-  height:54px;border:none;border-radius:999px;
-  background:var(--forest);color:var(--cream);
-  font-family:'Karla',sans-serif;font-size:16px;font-weight:600;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:background .3s ease,transform .15s ease;
-}
-.cta:hover{background:var(--raspberry)}
-.cta:active{transform:scale(.985)}
-.cta:focus-visible{outline:3px solid var(--raspberry);outline-offset:3px}
-.cta::after{
-  content:"";position:absolute;inset:0;border-radius:999px;
-  background:rgba(255,255,255,.28);transform:scaleX(0);transform-origin:left;
-}
-.cta.sweep::after{animation:sweep .9s cubic-bezier(.4,0,.2,1)}
-@keyframes sweep{0%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:0}}
-
-.track{position:relative;padding:0 6px}
-.rail{position:absolute;top:33px;left:44px;right:44px;height:3px;background:var(--line);border-radius:99px;overflow:hidden}
-.fill{height:100%;width:0;background:var(--raspberry);border-radius:99px;transition:width .9s cubic-bezier(.65,0,.35,1)}
-.stages{position:relative;display:flex;justify-content:space-between}
-.stage{display:flex;flex-direction:column;align-items:center;gap:10px;width:33%}
-.dot{
-  width:66px;height:66px;border-radius:50%;
-  background:var(--cream);border:2px solid var(--line);
-  display:grid;place-items:center;cursor:pointer;
-  position:relative;
-  transition:background .45s ease,border-color .45s ease,transform .45s cubic-bezier(.34,1.4,.64,1);
-}
-.dot svg{width:26px;height:26px;stroke:var(--soft);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .45s ease}
-.dot:focus-visible{outline:3px solid var(--raspberry);outline-offset:4px}
-.stage.done .dot{border-color:var(--raspberry)}
-.stage.done .dot svg{stroke:var(--raspberry)}
-.stage.on .dot{background:var(--raspberry);border-color:var(--raspberry);transform:scale(1.14)}
-.stage.on .dot svg{stroke:var(--cream)}
-.stage.on.pulse .dot{animation:halo 2.4s ease-out infinite}
-.dot.wobble{animation:wobble .5s cubic-bezier(.36,.07,.19,.97)}
-@keyframes wobble{
-  0%{transform:scale(1) rotate(0)}
-  20%{transform:scale(1.16) rotate(-7deg)}
-  40%{transform:scale(1.16) rotate(6deg)}
-  60%{transform:scale(1.16) rotate(-4deg)}
-  80%{transform:scale(1.16) rotate(2deg)}
-  100%{transform:scale(1.14) rotate(0)}
-}
-.ring{
-  position:absolute;inset:0;border-radius:50%;
-  border:2px solid var(--raspberry);pointer-events:none;
-  animation:ripple .75s cubic-bezier(.22,1,.36,1) forwards;
-}
-@keyframes ripple{from{transform:scale(1);opacity:.7}to{transform:scale(2.1);opacity:0}}
-.stage{position:relative}
-@keyframes halo{0%{box-shadow:0 0 0 0 rgba(192,51,94,.4)}70%{box-shadow:0 0 0 16px rgba(192,51,94,0)}100%{box-shadow:0 0 0 0 rgba(192,51,94,0)}}
-.cap{font-size:13px;color:var(--soft);text-align:center;transition:color .4s ease}
-.stage.on .cap{color:var(--ink);font-weight:600}
-
-.panel{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
-.panel.swap .swapme{animation:lift .5s cubic-bezier(.22,1,.36,1)}
-@keyframes lift{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
-.panel h2{font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
-.panel p{color:var(--soft);font-size:15px;max-width:62ch}
-.tag{
-  display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;
-  background:var(--butter);color:#4A3406;font-size:13px;font-weight:600;
-}
-
-.items{margin-top:22px;background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:6px 20px}
-.row{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
-.row:last-child{border:none;font-weight:600}
-.row span:last-child{font-variant-numeric:tabular-nums;color:var(--soft)}
-.row:last-child span:last-child{color:var(--ink)}
-.row em{display:block;font-style:normal;font-size:13px;color:var(--soft)}
-
-footer{margin-top:26px;text-align:center;font-size:13px;color:var(--soft);line-height:1.9}
-
-.sec-head{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:34px 2px 4px}
-.sec-sub{font-size:15px;color:var(--soft);margin:0 2px 16px}
-
-.seg{display:flex;gap:4px;background:rgba(43,27,39,.07);padding:4px;border-radius:999px;margin-bottom:16px}
-.seg button{
-  flex:1;height:42px;border:none;border-radius:999px;background:transparent;
-  font-family:'Karla',sans-serif;font-size:15px;font-weight:600;color:var(--soft);
-  cursor:pointer;transition:background .35s ease,color .35s ease;
-}
-.seg button.on{background:var(--cream);color:var(--ink)}
-.seg button:focus-visible{outline:3px solid var(--raspberry);outline-offset:2px}
-
-.pane{display:none}
-.pane.show{display:block;animation:lift .45s cubic-bezier(.22,1,.36,1)}
-
-.plan{
-  display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
-  background:var(--cream);border:2px solid var(--line);border-radius:20px;
-  padding:18px;margin-bottom:10px;cursor:pointer;font-family:'Karla',sans-serif;
-  transition:border-color .3s ease,transform .3s cubic-bezier(.34,1.4,.64,1);
-}
-.plan:hover{transform:translateY(-2px)}
-.plan:focus-visible{outline:3px solid var(--raspberry);outline-offset:3px}
-.plan.picked{border-color:var(--raspberry)}
-.tick{
-  flex:0 0 22px;height:22px;margin-top:2px;border-radius:50%;
-  border:2px solid var(--line);display:grid;place-items:center;
-  transition:background .3s ease,border-color .3s ease;
-}
-.tick::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--cream);transform:scale(0);transition:transform .3s cubic-bezier(.34,1.6,.64,1)}
-.plan.picked .tick{background:var(--raspberry);border-color:var(--raspberry)}
-.plan.picked .tick::after{transform:scale(1)}
-.plan-name{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
-.plan-desc{font-size:14px;color:var(--soft);margin-top:3px}
-.plan-price{margin-left:auto;text-align:right;font-size:16px;font-weight:600;white-space:nowrap}
-.plan-price em{display:block;font-style:normal;font-size:12px;color:var(--soft);font-weight:400}
-.best{background:var(--butter);color:#4A3406;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
-
-.field{margin-bottom:14px}
-.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
-.field select,.field input{
-  width:100%;height:48px;padding:0 14px;border-radius:14px;
-  border:2px solid var(--line);background:var(--cream);
-  font-family:'Karla',sans-serif;font-size:15px;color:var(--ink);
-  transition:border-color .25s ease;
-}
-.field select:focus,.field input:focus{outline:none;border-color:var(--raspberry)}
-.manual-box{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:20px}
-
-.confirm{
-  margin-top:14px;padding:14px 16px;border-radius:16px;
-  background:var(--forest);color:var(--cream);font-size:14px;line-height:1.5;
-  display:none;
-}
-.confirm.show{display:block;animation:lift .45s cubic-bezier(.22,1,.36,1)}
-  *{animation:none!important;transition-duration:.01ms!important}
-  .card{opacity:1;transform:none}
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f0f0f0; --screen-bg: #ffffff;
+    --gray-100: #f5f5f5; --gray-200: #e8e8e8; --gray-300: #d0d0d0;
+    --gray-400: #b0b0b0; --gray-500: #888888; --gray-700: #444444;
+    --gray-900: #1a1a1a; --white: #ffffff;
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-pill: 999px;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 24px 16px; gap: 16px; }
+  .wf-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--gray-500); text-transform: uppercase; text-align: center; }
+  .phone { width: 390px; min-height: 760px; background: var(--screen-bg); border-radius: 36px; border: 2px solid var(--gray-300); overflow: hidden; position: relative; box-shadow: 0 8px 40px rgba(0,0,0,0.10); }
+  .screen { display: none; flex-direction: column; padding: 48px 24px 32px; gap: 16px; min-height: 760px; }
+  .screen.active { display: flex; }
+  .wf-box { background: var(--gray-100); border: 1.5px dashed var(--gray-300); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 12px; font-weight: 500; text-align: center; }
+  .wf-logo { width: 72px; height: 72px; border-radius: 50%; background: var(--gray-100); border: 1.5px dashed var(--gray-300); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 11px; font-weight: 500; align-self: center; }
+  .wf-title { font-size: 28px; font-weight: 700; color: var(--gray-900); text-align: center; }
+  .wf-subtitle { font-size: 13px; color: var(--gray-500); text-align: center; line-height: 1.5; }
+  .wf-label-text { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+  .wf-input { height: 48px; background: var(--gray-100); border: 1.5px solid var(--gray-300); border-radius: var(--radius-md); display: flex; align-items: center; padding: 0 14px; color: var(--gray-400); font-size: 13px; }
+  .wf-input-tall { height: 64px; background: var(--gray-100); border: 1.5px solid var(--gray-300); border-radius: var(--radius-md); display: flex; align-items: center; padding: 0 14px; color: var(--gray-400); font-size: 13px; }
+  .wf-btn-primary { height: 52px; background: var(--gray-900); border-radius: var(--radius-pill); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 15px; font-weight: 600; cursor: pointer; border: none; width: 100%; font-family: 'Inter', sans-serif; transition: opacity 0.15s; }
+  .wf-btn-primary:hover { opacity: 0.85; }
+  .wf-btn-secondary { height: 52px; background: transparent; border: 1.5px solid var(--gray-900); border-radius: var(--radius-pill); display: flex; align-items: center; justify-content: center; color: var(--gray-900); font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; }
+  .wf-divider { display: flex; align-items: center; gap: 12px; color: var(--gray-400); font-size: 12px; }
+  .wf-divider::before, .wf-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-300); }
+  .screen-header { display: flex; justify-content: space-between; align-items: center; }
+  .screen-title { font-size: 20px; font-weight: 700; color: var(--gray-900); }
+  .search-bar { height: 44px; background: var(--gray-100); border: 1.5px solid var(--gray-200); border-radius: var(--radius-pill); display: flex; align-items: center; padding: 0 16px; gap: 8px; color: var(--gray-400); font-size: 13px; }
+  .cat-tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .cat-tab { padding: 7px 16px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; border: 1.5px solid var(--gray-300); background: var(--gray-100); color: var(--gray-700); }
+  .cat-tab.active { background: var(--gray-900); color: var(--white); border-color: var(--gray-900); }
+  .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-bottom: 40px; }
+  .menu-card { background: var(--gray-100); border: 1.5px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; cursor: pointer; transition: transform 0.15s; }
+  .menu-card:hover { transform: scale(1.02); }
+  .menu-card-img { height: 110px; background: var(--gray-200); border-bottom: 1.5px dashed var(--gray-300); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 11px; }
+  .menu-card-body { padding: 10px; }
+  .menu-card-name { font-size: 12px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+  .menu-card-price { font-size: 12px; color: var(--gray-500); }
+  .size-options { display: flex; gap: 10px; }
+  .size-btn { flex: 1; height: 40px; border-radius: var(--radius-sm); background: var(--gray-100); border: 1.5px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray-700); cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; }
+  .size-btn.active { background: var(--gray-900); color: var(--white); border-color: var(--gray-900); }
+  .progress-track { display: flex; align-items: flex-start; justify-content: space-between; position: relative; padding: 0 10px; }
+  .progress-track::before { content: ''; position: absolute; top: 29px; left: 60px; right: 60px; height: 2px; background: var(--gray-200); z-index: 0; }
+  .progress-fill { position: absolute; top: 29px; left: 60px; height: 2px; background: var(--gray-900); z-index: 1; transition: width 0.4s; }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; }
+  .stage-dot { width: 58px; height: 58px; border-radius: 50%; background: var(--gray-100); border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; }
+  .stage-dot.active { background: var(--gray-900); border-color: var(--gray-900); }
+  .stage-dot.done { background: var(--gray-700); border-color: var(--gray-700); }
+  .stage-label { font-size: 13px; font-weight: 500; color: var(--gray-500); }
+  .stage-label.active { color: var(--gray-900); font-weight: 600; }
+  .eta-row { display: flex; align-items: baseline; gap: 8px; }
+  .eta-number { font-size: 52px; font-weight: 700; color: var(--gray-900); line-height: 1; }
+  .eta-unit { font-size: 15px; color: var(--gray-500); }
+  .eta-pickup { font-size: 13px; color: var(--gray-500); }
+  .wf-card { background: var(--gray-100); border: 1.5px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .divider { height: 1px; background: var(--gray-200); }
+  .status-title { font-size: 20px; font-weight: 700; color: var(--gray-900); }
+  .status-body { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+  .wf-tag { display: inline-flex; align-items: center; padding: 5px 14px; background: var(--gray-200); border-radius: var(--radius-pill); font-size: 12px; font-weight: 600; color: var(--gray-700); }
+  .confirm-icon { width: 80px; height: 80px; border-radius: 50%; background: var(--gray-900); display: flex; align-items: center; justify-content: center; font-size: 32px; align-self: center; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+  .summary-key { color: var(--gray-500); }
+  .summary-val { color: var(--gray-900); font-weight: 600; }
+  .back-btn { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-700); cursor: pointer; background: none; border: none; font-family: 'Inter', sans-serif; padding: 4px 0; }
+  .screen-indicator { display: flex; gap: 6px; justify-content: center; align-items: center; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-300); transition: all 0.2s; cursor: pointer; }
+  .dot.active { background: var(--gray-900); width: 18px; border-radius: 3px; }
+  .email-block { background: var(--gray-100); border: 1.5px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .email-row { display: flex; gap: 8px; }
+  .email-input { flex: 1; height: 44px; background: var(--white); border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); display: flex; align-items: center; padding: 0 12px; color: var(--gray-400); font-size: 13px; }
+  .email-btn { height: 44px; padding: 0 16px; background: var(--gray-900); border-radius: var(--radius-sm); color: var(--white); font-size: 13px; font-weight: 600; display: flex; align-items: center; cursor: pointer; border: none; font-family: 'Inter', sans-serif; }
+  .state-tabs { display: flex; gap: 6px; justify-content: center; }
+  .state-tab { padding: 6px 14px; border-radius: var(--radius-pill); font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--gray-300); background: var(--gray-100); color: var(--gray-500); transition: all 0.2s; }
+  .state-tab.active { background: var(--gray-900); color: var(--white); border-color: var(--gray-900); }
+  @media (max-width: 430px) { .phone { width: 100%; border-radius: 0; border: none; } body { padding: 0; } }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <div class="brand">
-      <svg class="logo" width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oodel logo">
-        <circle cx="18" cy="18" r="17" fill="var(--forest)"/>
-        <path d="M11 24 L18 10 L25 24 Z" fill="var(--cream)"/>
-        <circle cx="18" cy="14" r="1.8" fill="var(--raspberry)"/>
-      </svg>
-      <div>
-        <div class="mark">Oodel<span>.</span></div>
-        <div class="tagline">Satisfying your client&rsquo;s cravings</div>
-      </div>
-    </div>
-    <div class="ordno">Order CK&#8209;2481</div>
-  </header>
-  <div style="height:16px"></div>
-
-  <main class="card">
-    <div class="swapme">
-      <span class="eta-num" id="etaNum">53</span><span class="eta-unit" id="etaUnit">minutes away</span>
-      <p class="eta-line">Pickup by <b id="etaTime">11:35 am</b> · Northridge</p>
-    </div>
-
-    <button class="cta" id="cta">Refresh my order status</button>
-
-    <div class="track">
-      <div class="rail"><div class="fill" id="fill"></div></div>
-      <div class="stages">
-        <div class="stage" data-i="0">
-          <button class="dot" aria-label="Order placed">
-            <svg viewBox="0 0 24 24"><path d="M5 3v18l2.5-1.8L10 21l2-1.8L14 21l2.5-1.8L19 21V3z"/><path d="M9 8h6M9 12h6"/></svg>
-          </button>
-          <div class="cap">Placed</div>
-        </div>
-        <div class="stage" data-i="1">
-          <button class="dot" aria-label="Baking and decorating">
-            <svg viewBox="0 0 24 24"><path d="M12 3c.9 1 .5 2-.3 2.6"/><path d="M5 12h14v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><path d="M6 12V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/><path d="M5 16h14"/></svg>
-          </button>
-          <div class="cap">Baking</div>
-        </div>
-        <div class="stage" data-i="2">
-          <button class="dot" aria-label="Ready for pickup">
-            <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-          </button>
-          <div class="cap">Ready</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel">
-      <div class="swapme">
-        <h2 id="pTitle">Order placed</h2>
-        <p id="pBody">We received your order at 10:42 am. It goes to the pastry bench in about eight minutes.</p>
-        <span class="tag" id="pTag">Paid · Pickup in store</span>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    Oodel · Northridge<br>
-    Questions about your order? Call (415) 555&#8209;0119<br>
-    <span style="display:inline-block;margin-top:10px">Designed by Vandan Patel</span>
-  </footer>
+<div class="wf-label">Oodel · Customer Portal · Wireframes</div>
+<div class="screen-indicator" id="indicator">
+  <div class="dot active" data-screen="0"></div>
+  <div class="dot" data-screen="1"></div>
+  <div class="dot" data-screen="2"></div>
+  <div class="dot" data-screen="3"></div>
+  <div class="dot" data-screen="4"></div>
 </div>
 
+<div class="phone">
+
+  <!-- SCREEN 1: Login -->
+  <div class="screen active" id="screen-0">
+    <div class="wf-logo">LOGO</div>
+    <div class="wf-title">Oodel</div>
+    <div class="wf-subtitle">A new way of satisfying<br>your client's cravings</div>
+    <div style="height:8px"></div>
+    <div class="wf-label-text">Email address</div>
+    <div class="wf-input">Enter your email</div>
+    <div class="wf-label-text">Order number</div>
+    <div class="wf-input">e.g. CK-2481</div>
+    <button class="wf-btn-primary" onclick="goTo(1)">Track my order</button>
+    <div class="wf-divider">or</div>
+    <button class="wf-btn-secondary" onclick="goTo(1)">Browse our menu</button>
+    <div style="flex:1"></div>
+    <div class="wf-subtitle" style="font-size:11px">Guest checkout available · No account needed</div>
+  </div>
+
+  <!-- SCREEN 2: Menu -->
+  <div class="screen" id="screen-1">
+    <div class="screen-header">
+      <div class="screen-title">Our Menu</div>
+      <div style="width:36px;height:36px;background:var(--gray-100);border:1.5px solid var(--gray-300);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px">🛒</div>
+    </div>
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Search items...
+    </div>
+    <div class="cat-tabs">
+      <div class="cat-tab active">All</div>
+      <div class="cat-tab">Cakes</div>
+      <div class="cat-tab">Cupcakes</div>
+      <div class="cat-tab">Pastries</div>
+      <div class="cat-tab">Donuts</div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Strawberry Cake</div><div class="menu-card-price">$24.00</div></div></div>
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Chocolate Cake</div><div class="menu-card-price">$22.00</div></div></div>
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Vanilla Cupcake</div><div class="menu-card-price">$14.00</div></div></div>
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Red Velvet Cake</div><div class="menu-card-price">$26.00</div></div></div>
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Croissant</div><div class="menu-card-price">$6.00</div></div></div>
+      <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Cheese Danish</div><div class="menu-card-price">$8.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Order Form -->
+  <div class="screen" id="screen-2">
+    <button class="back-btn" onclick="goTo(1)">← Back to menu</button>
+    <div class="screen-title">Customize order</div>
+    <div class="wf-box" style="height:140px">[ Selected Item Image ]</div>
+    <div class="wf-label-text">Size</div>
+    <div class="size-options">
+      <button class="size-btn">Small</button>
+      <button class="size-btn active">Medium</button>
+      <button class="size-btn">Large</button>
+    </div>
+    <div class="wf-label-text">Flavor</div>
+    <div class="wf-input">Select a flavor ▾</div>
+    <div class="wf-label-text">Pickup date</div>
+    <div class="wf-input">Select date 📅</div>
+    <div class="wf-label-text">Message on cake <span style="font-weight:400;color:var(--gray-500)">(optional)</span></div>
+    <div class="wf-input-tall">e.g. Happy Birthday!</div>
+    <div style="flex:1"></div>
+    <button class="wf-btn-primary" onclick="goTo(3)">Place order — $24.00</button>
+  </div>
+
+  <!-- SCREEN 4: Confirmation -->
+  <div class="screen" id="screen-3" style="align-items:center;text-align:center;padding-top:60px">
+    <div class="confirm-icon">✓</div>
+    <div style="font-size:26px;font-weight:700;color:var(--gray-900)">Order confirmed!</div>
+    <div class="wf-subtitle">Your order CK-2481 has been received.<br>We'll start preparing it shortly.</div>
+    <div class="wf-card" style="width:100%;text-align:left;margin-top:8px">
+      <div class="summary-row"><span class="summary-key">Item</span><span class="summary-val">Strawberry Cake (M)</span></div>
+      <div class="divider"></div>
+      <div class="summary-row"><span class="summary-key">Pickup</span><span class="summary-val">Oct 2 · 11:35 am</span></div>
+      <div class="divider"></div>
+      <div class="summary-row"><span class="summary-key">Location</span><span class="summary-val">Northridge</span></div>
+      <div class="divider"></div>
+      <div class="summary-row"><span class="summary-key">Total</span><span class="summary-val">$24.00</span></div>
+    </div>
+    <div style="width:100%;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+      <button class="wf-btn-primary" onclick="goTo(4)">Track my order</button>
+      <button class="wf-btn-secondary" onclick="goTo(1)">Back to menu</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: Tracker -->
+  <div class="screen" id="screen-4">
+    <div class="screen-header">
+      <div style="font-size:13px;font-weight:600;color:var(--gray-700)">Oodel</div>
+      <div style="font-size:12px;color:var(--gray-500)">Order CK-2481</div>
+    </div>
+    <div class="state-tabs">
+      <div class="state-tab active" onclick="setTrackerState(0,this)">Placed</div>
+      <div class="state-tab" onclick="setTrackerState(1,this)">Baking</div>
+      <div class="state-tab" onclick="setTrackerState(2,this)">Ready</div>
+    </div>
+    <div class="wf-card">
+      <div class="eta-row"><span class="eta-number" id="eta-num">53</span><span class="eta-unit" id="eta-unit">minutes away</span></div>
+      <div class="eta-pickup">Pickup by 11:35 am · Northridge</div>
+      <button class="wf-btn-primary">Refresh my order status</button>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        <div class="stage"><div class="stage-dot active" id="dot-0">🧾</div><div class="stage-label active" id="lbl-0">Placed</div></div>
+        <div class="stage"><div class="stage-dot" id="dot-1">👨‍🍳</div><div class="stage-label" id="lbl-1">Baking</div></div>
+        <div class="stage"><div class="stage-dot" id="dot-2">✅</div><div class="stage-label" id="lbl-2">Ready</div></div>
+      </div>
+      <div class="divider"></div>
+      <div><div class="status-title" id="status-title">Order placed</div><div class="status-body" id="status-body">We received your order at 10:42 am. It goes to the pastry bench in about eight minutes.</div></div>
+      <div class="wf-tag">Paid · Pickup in store</div>
+    </div>
+    <div class="email-block">
+      <div style="font-size:13px;font-weight:600;color:var(--gray-900)">Get notified when your order is ready</div>
+      <div class="email-row">
+        <div class="email-input">your@email.com</div>
+        <button class="email-btn">Notify me</button>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <div class="wf-subtitle" style="font-size:11px">Oodel · Northridge</div>
+  </div>
+
+</div>
+
+<div class="wf-label" id="screen-name-label">Screen 1 of 5 — Login / Landing</div>
+
 <script>
-(function(){
-  var stages = [
-    {title:"Order placed",
-     body:"We received your order at 10:42 am. It goes to the pastry bench in about eight minutes.",
-     tag:"Paid · Pickup in store", eta:53, time:"11:35 am", fill:0},
-    {title:"Baking and decorating",
-     body:"Your cake is in the oven now. Piping and the name plaque come last, so this is the longest stretch.",
-     tag:"Nadia is decorating it", eta:21, time:"11:35 am", fill:50},
-    {title:"Ready for pickup",
-     body:"Boxed, ribboned, and waiting at the front counter. Give your order number to anyone at the register.",
-     tag:"Please collect within 2 hours", eta:0, time:"now", fill:100}
-  ];
+const screenNames = [
+  "Screen 1 of 5 — Login / Landing",
+  "Screen 2 of 5 — Menu / Browse",
+  "Screen 3 of 5 — Order Form",
+  "Screen 4 of 5 — Order Confirmation",
+  "Screen 5 of 5 — Order Tracker"
+];
 
-  var fill = document.getElementById('fill'),
-      panel = document.getElementById('panel'),
-      cta = document.getElementById('cta'),
-      els = [].slice.call(document.querySelectorAll('.stage')),
-      current = 0, busy = false;
+function goTo(n) {
+  document.querySelectorAll('.screen').forEach((s,i) => s.classList.toggle('active', i===n));
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===n));
+  document.getElementById('screen-name-label').textContent = screenNames[n];
+  window.scrollTo(0,0);
+}
 
-  function countTo(node, to){
-    var from = parseInt(node.textContent, 10) || 0, start = null;
-    if (from === to) return;
-    function step(t){
-      if (!start) start = t;
-      var k = Math.min((t - start) / 900, 1);
-      node.textContent = Math.round(from + (to - from) * (k * (2 - k)));
-      if (k < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+const states = [
+  { num:"53", unit:"minutes away", fill:"0%", dots:["active","",""], title:"Order placed", body:"We received your order at 10:42 am. It goes to the pastry bench in about eight minutes." },
+  { num:"21", unit:"minutes away", fill:"50%", dots:["done","active",""], title:"Now baking", body:"Your order is in the oven. We'll let you know as soon as it's ready for pickup." },
+  { num:"Ready", unit:"now", fill:"100%", dots:["done","done","active"], title:"Your order is ready!", body:"Head to Northridge to pick up your order. Show this screen at the counter." }
+];
+
+function setTrackerState(idx, el) {
+  document.querySelectorAll('.state-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const s = states[idx];
+  document.getElementById('eta-num').textContent = s.num;
+  document.getElementById('eta-unit').textContent = s.unit;
+  document.getElementById('progress-fill').style.width = s.fill;
+  document.getElementById('status-title').textContent = s.title;
+  document.getElementById('status-body').textContent = s.body;
+  for(let i=0;i<3;i++){
+    document.getElementById('dot-'+i).className='stage-dot '+s.dots[i];
+    document.getElementById('lbl-'+i).className='stage-label '+(s.dots[i]?'active':'');
   }
+}
 
-  function show(i){
-    if (busy) return;
-    busy = true;
-    current = i;
-    var s = stages[i];
-
-    fill.style.width = s.fill + '%';
-
-    els.forEach(function(el, n){
-      el.classList.toggle('on', n === i);
-      el.classList.toggle('done', n < i);
-      el.classList.toggle('pulse', n === i && i === 1);
-    });
-
-    panel.classList.remove('swap');
-    void panel.offsetWidth;
-    panel.classList.add('swap');
-
-    countTo(document.getElementById('etaNum'), s.eta);
-
-    setTimeout(function(){
-      document.getElementById('pTitle').textContent = s.title;
-      document.getElementById('pBody').textContent = s.body;
-      document.getElementById('pTag').textContent = s.tag;
-      document.getElementById('etaTime').textContent = s.time;
-      var unit = document.getElementById('etaUnit');
-      unit.textContent = i === 2 ? 'Ready now' : 'minutes away';
-      unit.classList.toggle('big', i === 2);
-      document.getElementById('etaNum').classList.toggle('hide', i === 2);
-      busy = false;
-    }, 450);
-  }
-
-  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function tapFeel(el){
-    if (calm) return;
-    if (navigator.vibrate) navigator.vibrate(15);
-    var dot = el.querySelector('.dot');
-    dot.classList.remove('wobble');
-    void dot.offsetWidth;
-    dot.classList.add('wobble');
-    var ring = document.createElement('span');
-    ring.className = 'ring';
-    dot.appendChild(ring);
-    setTimeout(function(){ ring.remove(); }, 760);
-  }
-
-  els.forEach(function(el){
-    el.querySelector('.dot').addEventListener('click', function(){
-      tapFeel(el);
-      show(+el.dataset.i);
-    });
-  });
-
-  cta.addEventListener('click', function(){
-    cta.classList.remove('sweep');
-    void cta.offsetWidth;
-    cta.classList.add('sweep');
-    if (navigator.vibrate && !calm) navigator.vibrate(15);
-    var next = (current + 1) % 3;
-    setTimeout(function(){ tapFeel(els[next]); show(next); }, 120);
-  });
-
-  setTimeout(function(){ show(0); }, 350);
-})();
+document.querySelectorAll('.dot[data-screen]').forEach(d => {
+  d.addEventListener('click', () => goTo(+d.dataset.screen));
+});
 </script>
 </body>
 </html>
