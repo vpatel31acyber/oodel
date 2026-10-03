@@ -109,6 +109,12 @@
     <button class="wf-btn-primary" onclick="goTo(1)">Track my order</button>
     <div class="wf-divider">or</div>
     <button class="wf-btn-secondary" onclick="goTo(1)">Browse our menu</button>
+
+    <!-- Error state -->
+    <div style="background:#fff0f0;border:1.5px solid #ffcccc;border-radius:10px;padding:12px 14px;font-size:12px;color:#cc0000;font-weight:500;">
+      ⚠️ Error state: Order not found. Please check your order number and try again.
+    </div>
+
     <div style="flex:1"></div>
     <div class="wf-subtitle" style="font-size:11px">Guest checkout available · No account needed</div>
   </div>
@@ -137,6 +143,19 @@
       <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Red Velvet Cake</div><div class="menu-card-price">$26.00</div></div></div>
       <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Croissant</div><div class="menu-card-price">$6.00</div></div></div>
       <div class="menu-card" onclick="goTo(2)"><div class="menu-card-img">[ Image ]</div><div class="menu-card-body"><div class="menu-card-name">Cheese Danish</div><div class="menu-card-price">$8.00</div></div></div>
+      <!-- Out of stock state -->
+      <div class="menu-card" style="opacity:0.45;pointer-events:none;position:relative;">
+        <div class="menu-card-img" style="background:var(--gray-300)">[ Image ]</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Lemon Tart</div>
+          <div class="menu-card-price" style="color:#cc0000;font-weight:600;">Unavailable today</div>
+          <div style="font-size:10px;color:var(--gray-500);margin-top:2px;">Missing ingredient</div>
+        </div>
+      </div>
+    </div>
+    <!-- Responsive note -->
+    <div style="background:var(--gray-100);border:1.5px dashed var(--gray-300);border-radius:10px;padding:10px 14px;font-size:11px;color:var(--gray-500);text-align:center;">
+      📱 Mobile-first design · Scales to tablet (768px) and desktop (1280px)
     </div>
   </div>
 
